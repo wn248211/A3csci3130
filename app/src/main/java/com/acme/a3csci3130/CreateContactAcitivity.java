@@ -31,7 +31,7 @@ public class CreateContactAcitivity extends Activity {
         addressField = (EditText) findViewById(R.id.address_create);
 
     }
-
+    //
     public void submitInfoButton(View v) {
         //each entry needs a unique ID
         String personID = appState.firebaseReference.push().getKey();

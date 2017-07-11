@@ -18,7 +18,16 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
 
+/* This class is test class, these tests will test each CRUD operation
+*   @author Wenlong Wu
+*   @since 1.0
+* */
+
 public class Espresso {
+    /*
+    * attributes
+    *
+    * */
     private String name_test, email_test, businessNum_test, primaryBus_test, province_test, address_test;
     private ListView contactListView;
     private FirebaseListAdapter<Contact> firebaseAdapter;

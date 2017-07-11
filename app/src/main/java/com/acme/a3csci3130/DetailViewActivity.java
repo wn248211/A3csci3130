@@ -8,12 +8,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/* This class is about showing all info about a business contact which have name, email, business number, primary business
+* province and address
+*   @author Wenlong Wu
+*   @since 1.0
+* */
+
 public class DetailViewActivity extends Activity {
+
+    /*
+    * attributes
+    * several EditText field to hold info from business contact
+    * Contact type attribute, which inherit info from MainActivity @see method "showDetailView"
+    * */
 
     private EditText nameField, emailField, businessNumberField, primaryBusField, provinceField, addressField;
     private MyApplicationData appState;
     Contact receivedPersonInfo;
 
+    /*
+    * onCreate method: define these EditText by Id
+    * @parameter savedInstanceState
+    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +44,8 @@ public class DetailViewActivity extends Activity {
         provinceField = (EditText) findViewById(R.id.province_detail);
         addressField = (EditText) findViewById(R.id.address_detail);
 
+        //check whether inherited object has info or not
+        // if it has, set these info to EditText fields
         if(receivedPersonInfo != null){
             nameField.setText(receivedPersonInfo.name);
             emailField.setText(receivedPersonInfo.email);
@@ -38,6 +56,11 @@ public class DetailViewActivity extends Activity {
         }
     }
 
+    /*
+   * updateContact method: get text from EditText field, and update these values by instead the old info on text fields.
+   * Meanwhile, use check methods (@see Check) to check whether these instance variables following
+   * formatting rules
+   * */
     public void updateContact(View v){
 
         String newNameField = nameField.getText().toString();
@@ -46,6 +69,10 @@ public class DetailViewActivity extends Activity {
         String newPrimaryBusField = primaryBusField.getText().toString();
         String newProvinceField = provinceField.getText().toString();
         String newAddressField = addressField.getText().toString();
+
+        //instantiation and check them info.
+        //if the result is false, a toast message will show up
+        //different case has different toast message
         Check check = new Check();
         if (!check.checkProvince(newProvinceField)) {
             LayoutInflater myInflater = LayoutInflater.from(this);
@@ -85,7 +112,10 @@ public class DetailViewActivity extends Activity {
             mytoast.setView(view);
             Toast.makeText(DetailViewActivity.this, "Your address must be less than 50 characters!",
                     Toast.LENGTH_LONG).show();
-        }else {
+        }
+        //if all check passed, a business contact will be updated
+        //after that, return to main menu
+        else {
             Contact newPerson = new Contact(receivedPersonInfo.uid, newNameField, newEmailField, newBusinessNumberField,
                     newPrimaryBusField, newProvinceField, newAddressField);
             appState.firebaseReference.child(receivedPersonInfo.uid).setValue(newPerson);
@@ -95,6 +125,10 @@ public class DetailViewActivity extends Activity {
 
     }
 
+    /*
+  * eraseContact method: remove business contact from list view
+  * after that, return to main menu
+  * */
     public void eraseContact(View v)
     {
         appState.firebaseReference.child(receivedPersonInfo.uid).removeValue();

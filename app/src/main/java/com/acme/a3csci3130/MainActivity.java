@@ -9,12 +9,28 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
+/* This class is about showing all existing contacts, and create button for creating a new business contact
+* edit button for show detail about a contact, and erase button for deleting a contact
+*   @author Wenlong Wu
+*   @since 1.0
+* */
+
 public class MainActivity extends Activity {
 
+     /*
+  * attributes
+  * ListView: list to hold all business contacts
+  * FirebaseListAdapter<Contact>: This class is a generic way of backing an Android ListView with a Firebase location.
+  * @parameter Contact: The class type to use as a model for the data contained in the children of the given Firebase location
+  * */
 
     private ListView contactListView;
     private FirebaseListAdapter<Contact> firebaseAdapter;
 
+    /*
+* onCreate method: set up firebase
+* @parameter savedInstanceState
+* */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +66,14 @@ public class MainActivity extends Activity {
         });
     }
 
+    //method createContactButton: a method will help you create a business contact
     public void createContactButton(View v)
     {
         Intent intent=new Intent(this, CreateContactAcitivity.class);
         startActivity(intent);
     }
 
+    //method showDetailView: a method will help you check business contacts in list view
     private void showDetailView(Contact person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);
@@ -63,12 +81,14 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    //method showDetailView: a method will help you view business contacts in list view
     public void showEditView(View v)
     {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
 
+    //method showDetailView: a method will help you delete a business contact in list view
     public void showDeleteView(View v)
     {
         Intent intent = new Intent(this, DeleteAcitivity.class);

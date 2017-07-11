@@ -11,11 +11,27 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
+/* This class is about showing business contact in list view.
+*   @author Wenlong Wu
+*   @since 1.0
+* */
 
 public class EditActivity extends Activity {
 
+    /*
+  * attributes
+  * ListView: list to hold all business contacts
+  * FirebaseListAdapter<Contact>: This class is a generic way of backing an Android ListView with a Firebase location.
+  * @parameter Contact: The class type to use as a model for the data contained in the children of the given Firebase location
+  * */
+
     private ListView contactListView;
     private FirebaseListAdapter<Contact> firebaseAdapter;
+
+    /*
+  * onCreate method: set up firebase
+  * @parameter savedInstanceState
+  * */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,9 @@ public class EditActivity extends Activity {
         });
     }
 
+    //method showDetailView: a method will help you go into a specific contact, and then you
+    //can do some further operations. For example, update and erase
+    //@parameter person
     private void showDetailView(Contact person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);

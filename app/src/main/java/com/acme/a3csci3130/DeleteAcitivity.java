@@ -7,15 +7,28 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
-
+/* This class is about deleting business contact.
+*   @author Wenlong Wu
+*   @since 1.0
+* */
 public class DeleteAcitivity extends Activity {
 
+    /*
+   * attributes
+   * ListView: list to hold all business contacts
+   * FirebaseListAdapter<Contact>: This class is a generic way of backing an Android ListView with a Firebase location.
+   * @parameter Contact: The class type to use as a model for the data contained in the children of the given Firebase location
+   * */
     private ListView contactListView;
     private FirebaseListAdapter<Contact> firebaseAdapter;
     private MyApplicationData appState;
+
+    /*
+   * onCreate method: set up firebase
+   * @parameter savedInstanceState
+   * */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +68,8 @@ public class DeleteAcitivity extends Activity {
         });
 
     }
+
+    //method returnToMain: a method serves for return button, which can help you return to main menu
     public void returnToMain(View v)
     {
         Intent intent = new Intent(this, MainActivity.class);
